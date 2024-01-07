@@ -62,6 +62,7 @@ public class KioskController {
     private void cancelCart() {
         if(shouldCancel()){
             kioskService.clearCart();
+            outputView.cancel();
         }
     }
 

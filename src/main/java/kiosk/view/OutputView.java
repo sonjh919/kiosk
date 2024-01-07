@@ -23,17 +23,18 @@ public class OutputView {
     private static final String CART_FORMAT = "\"%s   | W %,d | %s\"";
     private static final String ADD_CART_FORMAT = "위 메뉴를 장바구니에 추가하시겠습니까?" + NEWLINE + "1. 확인        2. 취소  ";
 
-    private static final String CART_EMPTY_MESSAGE = " [ERROR] 장바구니가 비어있습니다. 메뉴를 담은 후 주문을 진행해주세요.";
+    private static final String CART_EMPTY_MESSAGE = "[ERROR] 장바구니가 비어있습니다. 메뉴를 담은 후 주문을 진행해주세요.";
     private static final String ORDER_TITLE = "아래와 같이 주문 하시겠습니까?" + NEWLINE + NEWLINE + "[ Orders ]";
     private static final String ORDER_FORMAT = "%s   | W %,d | %d개 | %s";
-    private static final String TOTAL_FORMAT = "[ TOTAL ]" + NEWLINE + "W %,d";
+    private static final String TOTAL_FORMAT = "[ TOTAL ]" + NEWLINE + "W %,d" + NEWLINE;
     private static final String ORDER_CONFIRM_FORMAT = "1. 주문        2. 메뉴판";
     private static final String ORDER_COMPLETE_FORMAT = "주문이 완료되었습니다!" + NEWLINE + NEWLINE + "대기번호는 [ %d ] 번 입니다."
             + NEWLINE + "(%d초후 메뉴판으로 돌아갑니다.)";
 
     private static final String CANCEL_CONFIRM_FORMAT = "진행하던 주문을 취소하시겠습니까?" + NEWLINE + "1. 확인     2. 취소";
+    private static final String CANCEL_FORMAT = "진행하던 주문이 취소되었습니다.";
 
-    private static final String TOTAL_SALES_AMOUNT_FORMAT = "[ 총 판매금액 현황 ]현재까지 총 판매된 금액은 [ %,d ] 입니다." + NEWLINE;
+    private static final String TOTAL_SALES_AMOUNT_FORMAT = "[ 총 판매금액 현황 ]현재까지 총 판매된 금액은 [ W %,d ] 입니다." + NEWLINE;
     private static final String ORDER_PRODUCTS_TITLE = "[ 총 판매상품 목록 현황 ] 현재까지 총 판매된 상품 목록은 아래와 같습니다.";
     private static final String ORDER_PRODUCTS_FORMAT = "- %s   | W %,d";
     private static final String BACK = "1. 돌아가기";
@@ -89,6 +90,8 @@ public class OutputView {
         System.out.println(CANCEL_CONFIRM_FORMAT);
     }
 
+    public void cancel() { System.out.println(NEWLINE + CANCEL_FORMAT); }
+
     public void salesSummary() {
         System.out.printf(TOTAL_SALES_AMOUNT_FORMAT+NEWLINE, SalesSummary.getInstance().getTotalSalesAmount());
         System.out.println(ORDER_PRODUCTS_TITLE);
@@ -100,4 +103,6 @@ public class OutputView {
     public void backToMenu() {
         System.out.println(BACK_MESSAGE);
     }
+
+
 }
