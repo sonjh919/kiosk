@@ -1,7 +1,8 @@
 package kiosk.view;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.function.Function;
+import java.util.function.IntSupplier;
 import kiosk.vo.MenuCategory;
 import kiosk.vo.ProductData;
 
@@ -13,92 +14,50 @@ public class InputView {
     private static final int BACK= 1;
     private static final int CANCEL = 2;
 
+
+
     public int menu() {
-        while (true) {
-            try {
-                int menuNumber = readUserInput();
-                validateMenuRange(menuNumber);
-                return menuNumber;
-            }catch(NumberFormatException e){
-                System.out.println(INPUT_ERROR_MESSAGE);
-            }
-            catch (IllegalArgumentException e){
-                System.out.println(RANGE_ERROR_MESSAGE);
-            }
-        }
+        return getInputWithValidation(this::readUserInput, this::validateMenuRange);
     }
 
     public ProductData product(int menuNumber) {
-        while (true) {
-            try {
-                int productNumber = readUserInput();
-                return validateProductRange(menuNumber, productNumber);
-            } catch (NumberFormatException e) {
-                System.out.println(INPUT_ERROR_MESSAGE);
-            } catch (IllegalArgumentException e){
-                System.out.println(RANGE_ERROR_MESSAGE);
-            }
-        }
+        return getInputWithValidation(this::readUserInput, input -> validateProductRange(menuNumber, input));
     }
 
     public boolean CartConfirm() {
-        while (true) {
-            try {
-                int cartConfirmation = readUserInput();
-                return validateConfirmation(cartConfirmation);
-            } catch (NumberFormatException e) {
-                System.out.println(INPUT_ERROR_MESSAGE);
-            } catch (IllegalArgumentException e){
-                System.out.println(RANGE_ERROR_MESSAGE);
-            }
-        }
+        return getInputWithValidation(this::readUserInput, this::validateConfirmation);
     }
 
     public boolean order() {
-        while (true) {
-            try {
-                int orderConfirmation = readUserInput();
-                return validateConfirmation(orderConfirmation);
-            } catch (NumberFormatException e) {
-                System.out.println(INPUT_ERROR_MESSAGE);
-            } catch (IllegalArgumentException e){
-                System.out.println(RANGE_ERROR_MESSAGE);
-            }
-        }
+        return getInputWithValidation(this::readUserInput, this::validateConfirmation);
     }
 
     public boolean cancel() {
-        while (true) {
-            try {
-                int cancelConfirmation = readUserInput();
-                return validateConfirmation(cancelConfirmation);
-            } catch (NumberFormatException e) {
-                System.out.println(INPUT_ERROR_MESSAGE);
-            } catch (IllegalArgumentException e){
-                System.out.println(RANGE_ERROR_MESSAGE);
-            }
-        }
-
+        return getInputWithValidation(this::readUserInput, this::validateConfirmation);
     }
 
     public int back() {
+        return getInputWithValidation(this::readUserInput, this::validateBackConfirmation);
+    }
+
+    private <T>T getInputWithValidation(IntSupplier inputSupplier, Function<Integer, T> function) {
         while (true) {
             try {
-                int backConfirmation = readUserInput();
-                validateBackConfirmation(backConfirmation);
-                return backConfirmation;
+                int input = inputSupplier.getAsInt();
+                return function.apply(input);
             } catch (NumberFormatException e) {
                 System.out.println(INPUT_ERROR_MESSAGE);
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
     }
 
-    private void validateBackConfirmation(int backConfirmation) {
-        if(backConfirmation != BACK){
-            throw new IllegalArgumentException();
+    private int validateBackConfirmation(int backConfirmation) {
+        if(backConfirmation == BACK){
+            return backConfirmation;
         }
+        throw new IllegalArgumentException();
     }
 
     private boolean validateConfirmation(int confirmation) {
@@ -107,15 +66,17 @@ public class InputView {
         throw new IllegalArgumentException();
     }
 
-    private void validateMenuRange (int number){
-        if(!(INPUT_START_RANGE <= number && number <= MenuCategory.countCategory())){
-            throw new IllegalArgumentException();
+    private int validateMenuRange (int number){
+        if((INPUT_START_RANGE <= number && number <= MenuCategory.countCategory())){
+            return number;
         }
+        throw new IllegalArgumentException();
     }
 
     private ProductData validateProductRange (int menuNumber, int productNumber){
         return ProductData.getProductByOrdinal(menuNumber, productNumber);
     }
+
 
     private int readUserInput() {
         Scanner sc = new Scanner(System.in);
