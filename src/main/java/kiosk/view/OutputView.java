@@ -12,7 +12,7 @@ import kiosk.vo.ProductData;
 
 public class OutputView {
     private static final String NEWLINE = System.lineSeparator();
-    private static final String SEPERATE_LINE = NEWLINE + "=========================================" + NEWLINE;
+    private static final String SEPARATE_LINE = NEWLINE + "=========================================" + NEWLINE;
 
     private static final String START_MESSAGE = "\"JH CAFE에 오신걸 환영합니다.\"" + NEWLINE;
     private static final String MENU_MESSAGE = "아래 메뉴판을 보시고 메뉴를 골라 입력해주세요." + NEWLINE;
@@ -43,7 +43,7 @@ public class OutputView {
     private static final int MILLISECOND = 1000;
 
     public void menu() {
-        System.out.println(SEPERATE_LINE + START_MESSAGE + MENU_MESSAGE + NEWLINE + MENU_TITLE);
+        System.out.println(SEPARATE_LINE + START_MESSAGE + MENU_MESSAGE + NEWLINE + MENU_TITLE);
 
         for(MenuCategory menuCategory : MenuCategory.values()){
             if(menuCategory == MenuCategory.SUMMARY || menuCategory == MenuCategory.EXIT) { continue; }
@@ -52,7 +52,7 @@ public class OutputView {
     }
 
     public void product(MenuNumber menuNumber) {
-        System.out.println(SEPERATE_LINE + MENU_MESSAGE);
+        System.out.println(SEPARATE_LINE + MENU_MESSAGE);
         int productNumber = INDEX;
         for(ProductData product : ProductData.values()){
             if(product.getMenuCategory().ordinal() == menuNumber.menuNumber()){
@@ -63,7 +63,7 @@ public class OutputView {
     }
 
     public void addToCartConfirmation(ProductData productData) {
-        System.out.printf(SEPERATE_LINE + CART_FORMAT + NEWLINE, productData.getName(), productData.getPrice(), productData.getDescription());
+        System.out.printf(SEPARATE_LINE + CART_FORMAT + NEWLINE, productData.getName(), productData.getPrice(), productData.getDescription());
         System.out.println(ADD_CART_FORMAT);
     }
 
@@ -72,7 +72,7 @@ public class OutputView {
     }
 
     public void orderConfirmation() {
-        System.out.println(SEPERATE_LINE + ORDER_TITLE);
+        System.out.println(SEPARATE_LINE + ORDER_TITLE);
 
         for (Map.Entry<Product, Integer> entry : Cart.getInstance().getProducts().entrySet()) {
             System.out.printf(ORDER_FORMAT + NEWLINE, entry.getKey().getName(), entry.getKey().getPrice(), entry.getValue(), entry.getKey().getDescription());
@@ -82,7 +82,7 @@ public class OutputView {
     }
 
     public void orderComplete(WaitTime waitTime) {
-        System.out.printf(SEPERATE_LINE + ORDER_COMPLETE_FORMAT + NEWLINE, WaitingNumber.getInstance().getWaitingNumber(), waitTime.waitTime()/MILLISECOND);
+        System.out.printf(SEPARATE_LINE + ORDER_COMPLETE_FORMAT + NEWLINE, WaitingNumber.getInstance().getWaitingNumber(), waitTime.waitTime()/MILLISECOND);
     }
 
     public void cancelCartConfirmation() {

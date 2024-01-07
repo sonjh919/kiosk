@@ -8,7 +8,7 @@ import kiosk.domain.WaitingNumber;
 import kiosk.vo.ProductData;
 
 public class KioskService {
-    private Cart cart;
+    private final Cart cart;
     private final SalesSummary salesSummary;
     private final WaitingNumber waitingNumber;
 
