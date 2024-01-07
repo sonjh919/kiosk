@@ -7,9 +7,8 @@ import kiosk.vo.ProductData;
 
 public class InputView {
     private static final int INPUT_START_RANGE = -1;
-    private static final String INDEX_ERROR_MESSAGE = "[ERROR] 잘못된 범위입니다. 다시 입력해 주세요.";
-    private static final String INTEGER_ERROR_MESSAGE = "[ERROR] 잘못된 형식입니다. 숫자를 입력해 주세요.";
-
+    private static final String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 형식입니다. 숫자만 입력해 주세요.";
+    private static final String RANGE_ERROR_MESSAGE = "[ERROR] 범위에 맞는 숫자를 입력해 주세요.";
     private static final int CONFIRMATION = 1;
     private static final int BACK= 1;
     private static final int CANCEL = 2;
@@ -20,10 +19,11 @@ public class InputView {
                 int menuNumber = readUserInput();
                 validateMenuRange(menuNumber);
                 return menuNumber;
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_ERROR_MESSAGE);
-            } catch (IllegalArgumentException e){
-                System.out.println(INDEX_ERROR_MESSAGE);
+            }catch(NumberFormatException e){
+                System.out.println(INPUT_ERROR_MESSAGE);
+            }
+            catch (IllegalArgumentException e){
+                System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
     }
@@ -33,10 +33,10 @@ public class InputView {
             try {
                 int productNumber = readUserInput();
                 return validateProductRange(menuNumber, productNumber);
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
             } catch (IllegalArgumentException e){
-                System.out.println(INDEX_ERROR_MESSAGE);
+                System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
     }
@@ -46,10 +46,10 @@ public class InputView {
             try {
                 int cartConfirmation = readUserInput();
                 return validateConfirmation(cartConfirmation);
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
             } catch (IllegalArgumentException e){
-                System.out.println(INDEX_ERROR_MESSAGE);
+                System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
     }
@@ -59,10 +59,10 @@ public class InputView {
             try {
                 int orderConfirmation = readUserInput();
                 return validateConfirmation(orderConfirmation);
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
             } catch (IllegalArgumentException e){
-                System.out.println(INDEX_ERROR_MESSAGE);
+                System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
     }
@@ -72,10 +72,10 @@ public class InputView {
             try {
                 int cancelConfirmation = readUserInput();
                 return validateConfirmation(cancelConfirmation);
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
             } catch (IllegalArgumentException e){
-                System.out.println(INDEX_ERROR_MESSAGE);
+                System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
 
@@ -87,16 +87,16 @@ public class InputView {
                 int backConfirmation = readUserInput();
                 validateBackConfirmation(backConfirmation);
                 return backConfirmation;
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
             } catch (IllegalArgumentException e){
-                System.out.println(INDEX_ERROR_MESSAGE);
+                System.out.println(RANGE_ERROR_MESSAGE);
             }
         }
     }
 
     private void validateBackConfirmation(int backConfirmation) {
-        if(backConfirmation != 1){
+        if(backConfirmation != BACK){
             throw new IllegalArgumentException();
         }
     }
@@ -119,9 +119,6 @@ public class InputView {
 
     private int readUserInput() {
         Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+        return Integer.parseInt(sc.nextLine());
     }
-
-
-
 }
