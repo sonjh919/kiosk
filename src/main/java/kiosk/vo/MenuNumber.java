@@ -1,7 +1,7 @@
 package kiosk.vo;
 
 public class MenuNumber {
-    private static final int INPUT_START_RANGE = -1;
+    private static final int INPUT_START_RANGE = 0;
     private final int menuNumber;
 
 
@@ -22,6 +22,10 @@ public class MenuNumber {
 
     public boolean isCorrectOrdinal(int categoryOrdinal) {
         return menuNumber == categoryOrdinal;
+    }
+
+    public MenuCategory getMenuCategoryByMenuNumber(){
+        return MenuCategory.getMenuCategoryOrdinal(menuNumber);
     }
 }
 

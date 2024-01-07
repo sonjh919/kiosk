@@ -28,12 +28,12 @@ public class KioskController {
         outputView.menu();
         MenuNumber menuNumber = inputView.menu();
 
-        switch (menuNumber.getMenuNumber()) {
-            case 1, 2, 3 -> selectProduct(menuNumber);
-            case 4 -> orderProduct();
-            case 5 -> cancelCart();
-            case 0 -> printSalesSummary();
-            case -1 -> System.exit(0);
+        switch (menuNumber.getMenuCategoryByMenuNumber()) {
+            case COFFEE, DESSERT, DRINK-> selectProduct(menuNumber);
+            case ORDER -> orderProduct();
+            case CANCEL -> cancelCart();
+            case SUMMARY -> printSalesSummary();
+            case EXIT -> System.exit(0);
         }
     }
 

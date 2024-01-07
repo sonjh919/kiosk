@@ -41,7 +41,7 @@ public enum ProductData {
     public static ProductData getProductByOrdinal(MenuNumber menuNumber, int productOrdinal) {
         int count = 1;
         for (ProductData product : ProductData.values()) {
-            if (menuNumber.isCorrectOrdinal(product.getMenuCategory().ordinal() + 1)) {
+            if (menuNumber.isCorrectOrdinal(product.getMenuCategory().ordinal())) {
                 if (count == productOrdinal) {
                     return product;
                 }

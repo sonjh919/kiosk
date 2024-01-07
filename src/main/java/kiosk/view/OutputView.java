@@ -12,20 +12,20 @@ import kiosk.vo.ProductData;
 
 public class OutputView {
     private static final String NEWLINE = System.lineSeparator();
-    private static final String SEPERATE_LINE = "=========================================" + NEWLINE;
+    private static final String SEPERATE_LINE = NEWLINE + "=========================================" + NEWLINE;
 
     private static final String START_MESSAGE = "\"JH CAFE에 오신걸 환영합니다.\"" + NEWLINE;
     private static final String MENU_MESSAGE = "아래 메뉴판을 보시고 메뉴를 골라 입력해주세요." + NEWLINE;
     private static final String MENU_TITLE = "[ JH CAFE 메뉴 ]";
     private static final String MENU_FORMAT = "%d. %s   | %s" + NEWLINE;
-    private static final String PRODUCT_FORMAT = "%d. %s   | W %d | %s";
+    private static final String PRODUCT_FORMAT = "%d. %s   | W %,d | %s";
 
-    private static final String CART_FORMAT = "\"%s   | W %d | %s\"";
+    private static final String CART_FORMAT = "\"%s   | W %,d | %s\"";
     private static final String ADD_CART_FORMAT = "위 메뉴를 장바구니에 추가하시겠습니까?" + NEWLINE + "1. 확인        2. 취소  ";
 
     private static final String ORDER_TITLE = "아래와 같이 주문 하시겠습니까?" + NEWLINE + NEWLINE + "[ Orders ]";
-    private static final String ORDER_FORMAT = "%s   | W %d | %d개 | %s";
-    private static final String TOTAL_FORMAT = "[ TOTAL ]" + NEWLINE + "W %d";
+    private static final String ORDER_FORMAT = "%s   | W %,d | %d개 | %s";
+    private static final String TOTAL_FORMAT = "[ TOTAL ]" + NEWLINE + "W %,d";
     private static final String ORDER_CONFIRM_FORMAT = "1. 주문        2. 메뉴판";
     private static final String ORDER_COMPLETE_FORMAT = "주문이 완료되었습니다!" + NEWLINE + NEWLINE + "대기번호는 [ %d ] 번 입니다."
             + NEWLINE + "(%d초후 메뉴판으로 돌아갑니다.)";
@@ -34,7 +34,7 @@ public class OutputView {
 
     private static final String TOTAL_SALES_AMOUNT_FORMAT = "[ 총 판매금액 현황 ]현재까지 총 판매된 금액은 [ %d ] 입니다." + NEWLINE;
     private static final String ORDER_PRODUCTS_TITLE = "[ 총 판매상품 목록 현황 ] 현재까지 총 판매된 상품 목록은 아래와 같습니다.";
-    private static final String ORDER_PRODUCTS_FORMAT = "- %s   | W %d";
+    private static final String ORDER_PRODUCTS_FORMAT = "- %s   | W %,d";
     private static final String BACK = "1. 돌아가기";
 
     private static final int INDEX = 1;
@@ -44,7 +44,8 @@ public class OutputView {
         System.out.println(SEPERATE_LINE + START_MESSAGE + MENU_MESSAGE + NEWLINE + MENU_TITLE);
 
         for(MenuCategory menuCategory : MenuCategory.values()){
-            System.out.printf(MENU_FORMAT, menuCategory.ordinal()+INDEX, menuCategory.getMenu(),menuCategory.getDescription());
+            if(menuCategory == MenuCategory.SUMMARY || menuCategory == MenuCategory.EXIT) { continue; }
+            System.out.printf(MENU_FORMAT, menuCategory.ordinal(), menuCategory.getMenu(),menuCategory.getDescription());
         }
     }
 
@@ -52,7 +53,7 @@ public class OutputView {
         System.out.println(SEPERATE_LINE + MENU_MESSAGE);
         int productNumber = INDEX;
         for(ProductData product : ProductData.values()){
-            if(product.getMenuCategory().ordinal()+INDEX== menuNumber.getMenuNumber()){
+            if(product.getMenuCategory().ordinal() == menuNumber.getMenuNumber()){
                 System.out.printf(PRODUCT_FORMAT + NEWLINE, productNumber, product.getName(), product.getPrice(), product.getDescription());
                 productNumber++;
             }
