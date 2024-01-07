@@ -33,9 +33,10 @@ public class OutputView {
     private static final String TOTAL_SALES_AMOUNT_FORMAT = "[ 총 판매금액 현황 ]현재까지 총 판매된 금액은 [ %d ] 입니다." + NEWLINE;
     private static final String ORDER_PRODUCTS_TITLE = "[ 총 판매상품 목록 현황 ] 현재까지 총 판매된 상품 목록은 아래와 같습니다.";
     private static final String ORDER_PRODUCTS_FORMAT = "- %s   | W %d";
-
     private static final String BACK = "1. 돌아가기";
+
     private static final int INDEX = 1;
+    private static final int MILLISECOND = 1000;
 
     public void menu() {
         System.out.println(SEPERATE_LINE + START_MESSAGE + MENU_MESSAGE + NEWLINE + MENU_TITLE);
@@ -47,7 +48,7 @@ public class OutputView {
 
     public void product(int menuNumber) {
         System.out.println(SEPERATE_LINE + MENU_MESSAGE);
-        int productNumber = 1;
+        int productNumber = INDEX;
         for(ProductData product : ProductData.values()){
             if(product.getMenuCategory().ordinal()+INDEX==menuNumber){
                 System.out.printf(PRODUCT_FORMAT + NEWLINE, productNumber, product.getName(), product.getPrice(), product.getDescription());
@@ -73,7 +74,7 @@ public class OutputView {
     }
 
     public void orderComplete(int wait) {
-        System.out.printf(SEPERATE_LINE + ORDER_COMPLETE_FORMAT + NEWLINE, WaitingNumber.getInstance().getWaitingNumber(), wait/1000);
+        System.out.printf(SEPERATE_LINE + ORDER_COMPLETE_FORMAT + NEWLINE, WaitingNumber.getInstance().getWaitingNumber(), wait/MILLISECOND);
     }
 
     public void cancelCartConfirmation() {
