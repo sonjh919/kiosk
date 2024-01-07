@@ -26,9 +26,10 @@ public class KioskService {
     }
 
     public WaitTime order() {
-        addSalesSummary();
-        addWaitingNumber();
-        clearCart();
+            IsCartEmpty();
+            addSalesSummary();
+            addWaitingNumber();
+            clearCart();
         return new WaitTime(WAIT_TIME);
     }
 
@@ -41,9 +42,12 @@ public class KioskService {
         waitingNumber.add();
     }
 
-    public void clearCart() {
-        cart.clear();
+    private void IsCartEmpty() {
+        if (cart.IsEmpty()) {
+            throw new RuntimeException();
+        }
     }
+    public void clearCart() { cart.clear(); }
 
     public void waitService(WaitTime waitTime) {
         try {

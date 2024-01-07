@@ -23,6 +23,7 @@ public class OutputView {
     private static final String CART_FORMAT = "\"%s   | W %,d | %s\"";
     private static final String ADD_CART_FORMAT = "위 메뉴를 장바구니에 추가하시겠습니까?" + NEWLINE + "1. 확인        2. 취소  ";
 
+    private static final String CART_EMPTY_MESSAGE = " [ERROR] 장바구니가 비어있습니다. 메뉴를 담은 후 주문을 진행해주세요.";
     private static final String ORDER_TITLE = "아래와 같이 주문 하시겠습니까?" + NEWLINE + NEWLINE + "[ Orders ]";
     private static final String ORDER_FORMAT = "%s   | W %,d | %d개 | %s";
     private static final String TOTAL_FORMAT = "[ TOTAL ]" + NEWLINE + "W %,d";
@@ -65,6 +66,9 @@ public class OutputView {
         System.out.println(ADD_CART_FORMAT);
     }
 
+    public void cartEmpty() {
+        System.out.println(CART_EMPTY_MESSAGE);
+    }
 
     public void orderConfirmation() {
         System.out.println(SEPERATE_LINE + ORDER_TITLE);
@@ -91,4 +95,5 @@ public class OutputView {
                 System.out.printf(ORDER_PRODUCTS_FORMAT + NEWLINE, product.getName(), product.getPrice()));
         System.out.println(BACK);
     }
+
 }

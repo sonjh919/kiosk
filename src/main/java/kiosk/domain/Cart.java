@@ -42,5 +42,7 @@ public class Cart{
         return orderProducts;
     }
 
-
+    public boolean IsEmpty() {
+        return products.isEmpty();
+    }
 }

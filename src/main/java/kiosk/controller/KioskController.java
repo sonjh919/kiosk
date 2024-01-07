@@ -49,9 +49,13 @@ public class KioskController {
 
     private void orderProduct() {
         if(shouldOrder()){
-            WaitTime waitTime = kioskService.order();
-            outputView.orderComplete(waitTime);
-            kioskService.waitService(waitTime);
+            try {
+                WaitTime waitTime = kioskService.order();
+                outputView.orderComplete(waitTime);
+                kioskService.waitService(waitTime);
+            }catch (RuntimeException e) {
+                outputView.cartEmpty();
+            }
         }
     }
 
