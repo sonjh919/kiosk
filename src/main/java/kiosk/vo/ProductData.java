@@ -24,7 +24,6 @@ public enum ProductData {
         this.menuCategory = menuCategory;
     }
 
-
     public String getName() {
         return name;
     }
@@ -39,11 +38,11 @@ public enum ProductData {
 
     public MenuCategory getMenuCategory() { return menuCategory; }
 
-    public static ProductData getProductByOrdinal(int categoryOrdinal, int productOrdinal) {
+    public static ProductData getProductByOrdinal(MenuNumber menuNumber, int productOrdinal) {
         int count = 1;
         for (ProductData product : ProductData.values()) {
-            if (product.getMenuCategory().ordinal()+1 == categoryOrdinal){
-                if(count==productOrdinal) {
+            if (menuNumber.isCorrectOrdinal(product.getMenuCategory().ordinal() + 1)) {
+                if (count == productOrdinal) {
                     return product;
                 }
                 count++;
@@ -51,5 +50,18 @@ public enum ProductData {
         }
       throw new IllegalArgumentException();
     }
+
+//    public static ProductData getProductByOrdinal(int categoryOrdinal, int productOrdinal) {
+//        int count = 1;
+//        for (ProductData product : ProductData.values()) {
+//            if (product.getMenuCategory().ordinal()+1 == categoryOrdinal){
+//                if(count==productOrdinal) {
+//                    return product;
+//                }
+//                count++;
+//            }
+//        }
+//        throw new IllegalArgumentException();
+//    }
 
 }

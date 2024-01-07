@@ -3,6 +3,7 @@ package kiosk.service;
 import kiosk.domain.Cart;
 import kiosk.domain.Product;
 import kiosk.domain.SalesSummary;
+import kiosk.vo.WaitTime;
 import kiosk.domain.WaitingNumber;
 import kiosk.vo.ProductData;
 
@@ -10,6 +11,8 @@ public class KioskService {
     private Cart cart;
     private final SalesSummary salesSummary;
     private final WaitingNumber waitingNumber;
+
+    private static final int WAIT_TIME= 3000;
 
     public KioskService() {
         this.cart = Cart.getInstance();
@@ -22,10 +25,11 @@ public class KioskService {
         cart.add(product);
     }
 
-    public void order() {
+    public WaitTime order() {
         addSalesSummary();
         addWaitingNumber();
         clearCart();
+        return new WaitTime(WAIT_TIME);
     }
 
     private void addSalesSummary() {
@@ -41,9 +45,9 @@ public class KioskService {
         cart.clear();
     }
 
-    public void waitService(int wait) {
+    public void waitService(WaitTime waitTime) {
         try {
-            Thread.sleep(wait);
+            Thread.sleep(waitTime.waitTime());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

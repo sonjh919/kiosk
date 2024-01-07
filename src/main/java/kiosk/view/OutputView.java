@@ -4,6 +4,8 @@ import java.util.Map;
 import kiosk.domain.Cart;
 import kiosk.domain.Product;
 import kiosk.domain.SalesSummary;
+import kiosk.vo.MenuNumber;
+import kiosk.vo.WaitTime;
 import kiosk.domain.WaitingNumber;
 import kiosk.vo.MenuCategory;
 import kiosk.vo.ProductData;
@@ -46,11 +48,11 @@ public class OutputView {
         }
     }
 
-    public void product(int menuNumber) {
+    public void product(MenuNumber menuNumber) {
         System.out.println(SEPERATE_LINE + MENU_MESSAGE);
         int productNumber = INDEX;
         for(ProductData product : ProductData.values()){
-            if(product.getMenuCategory().ordinal()+INDEX==menuNumber){
+            if(product.getMenuCategory().ordinal()+INDEX== menuNumber.getMenuNumber()){
                 System.out.printf(PRODUCT_FORMAT + NEWLINE, productNumber, product.getName(), product.getPrice(), product.getDescription());
                 productNumber++;
             }
@@ -73,8 +75,8 @@ public class OutputView {
         System.out.printf(NEWLINE + TOTAL_FORMAT + NEWLINE + ORDER_CONFIRM_FORMAT + NEWLINE, Cart.getInstance().getTotalPrice());
     }
 
-    public void orderComplete(int wait) {
-        System.out.printf(SEPERATE_LINE + ORDER_COMPLETE_FORMAT + NEWLINE, WaitingNumber.getInstance().getWaitingNumber(), wait/MILLISECOND);
+    public void orderComplete(WaitTime waitTime) {
+        System.out.printf(SEPERATE_LINE + ORDER_COMPLETE_FORMAT + NEWLINE, WaitingNumber.getInstance().getWaitingNumber(), waitTime.waitTime()/MILLISECOND);
     }
 
     public void cancelCartConfirmation() {

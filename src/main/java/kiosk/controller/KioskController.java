@@ -1,5 +1,7 @@
 package kiosk.controller;
 
+import kiosk.vo.MenuNumber;
+import kiosk.vo.WaitTime;
 import kiosk.service.KioskService;
 import kiosk.view.InputView;
 import kiosk.view.OutputView;
@@ -24,9 +26,9 @@ public class KioskController {
 
     private void selectMenu() {
         outputView.menu();
-        int menuNumber = inputView.menu();
+        MenuNumber menuNumber = inputView.menu();
 
-        switch (menuNumber) {
+        switch (menuNumber.getMenuNumber()) {
             case 1, 2, 3 -> selectProduct(menuNumber);
             case 4 -> orderProduct();
             case 5 -> cancelCart();
@@ -36,7 +38,7 @@ public class KioskController {
     }
 
 
-    private void selectProduct(int menuNumber) {
+    private void selectProduct(MenuNumber menuNumber) {
         outputView.product(menuNumber);
         ProductData productData = inputView.product(menuNumber);
 
@@ -47,10 +49,9 @@ public class KioskController {
 
     private void orderProduct() {
         if(shouldOrder()){
-            kioskService.order();
-            int wait = 3000;
-            outputView.orderComplete(wait);
-            kioskService.waitService(wait);
+            WaitTime waitTime = kioskService.order();
+            outputView.orderComplete(waitTime);
+            kioskService.waitService(waitTime);
         }
     }
 
@@ -79,6 +80,5 @@ public class KioskController {
         outputView.addToCartConfirmation(productData);
         return inputView.CartConfirm();
     }
-
 
 }
