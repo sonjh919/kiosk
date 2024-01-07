@@ -22,19 +22,19 @@ public class InputView {
         return getInputWithValidation(this::readUserInput, input -> validateProductRange(menuNumber, input));
     }
 
-    public boolean CartConfirm() {
+    public boolean allowAddCart() {
         return getInputWithValidation(this::readUserInput, this::validateConfirmation);
     }
 
-    public boolean order() {
+    public boolean allowOrder() {
         return getInputWithValidation(this::readUserInput, this::validateConfirmation);
     }
 
-    public boolean cancel() {
+    public boolean allowCancel() {
         return getInputWithValidation(this::readUserInput, this::validateConfirmation);
     }
 
-    public int back() {
+    public boolean allowBack() {
         return getInputWithValidation(this::readUserInput, this::validateBackConfirmation);
     }
 
@@ -51,9 +51,9 @@ public class InputView {
         }
     }
 
-    private int validateBackConfirmation(int backConfirmation) {
-        if(backConfirmation == BACK){
-            return backConfirmation;
+    private boolean validateBackConfirmation(int backConfirmation) {
+        if(backConfirmation == BACK) {
+            return true;
         }
         throw new IllegalArgumentException();
     }

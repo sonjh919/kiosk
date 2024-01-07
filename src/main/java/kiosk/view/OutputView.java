@@ -33,10 +33,11 @@ public class OutputView {
 
     private static final String CANCEL_CONFIRM_FORMAT = "진행하던 주문을 취소하시겠습니까?" + NEWLINE + "1. 확인     2. 취소";
 
-    private static final String TOTAL_SALES_AMOUNT_FORMAT = "[ 총 판매금액 현황 ]현재까지 총 판매된 금액은 [ %d ] 입니다." + NEWLINE;
+    private static final String TOTAL_SALES_AMOUNT_FORMAT = "[ 총 판매금액 현황 ]현재까지 총 판매된 금액은 [ %,d ] 입니다." + NEWLINE;
     private static final String ORDER_PRODUCTS_TITLE = "[ 총 판매상품 목록 현황 ] 현재까지 총 판매된 상품 목록은 아래와 같습니다.";
     private static final String ORDER_PRODUCTS_FORMAT = "- %s   | W %,d";
     private static final String BACK = "1. 돌아가기";
+    private static final String BACK_MESSAGE = "메뉴판으로 이동합니다.";
 
     private static final int INDEX = 1;
     private static final int MILLISECOND = 1000;
@@ -96,4 +97,7 @@ public class OutputView {
         System.out.println(BACK);
     }
 
+    public void backToMenu() {
+        System.out.println(BACK_MESSAGE);
+    }
 }

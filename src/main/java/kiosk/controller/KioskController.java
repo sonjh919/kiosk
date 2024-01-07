@@ -67,22 +67,25 @@ public class KioskController {
 
     private void printSalesSummary() {
         outputView.salesSummary();
-        inputView.back();
+
+        if(inputView.allowBack()){
+            outputView.backToMenu();
+        }
     }
 
     private boolean shouldCancel() {
         outputView.cancelCartConfirmation();
-        return inputView.cancel();
+        return inputView.allowCancel();
     }
 
     private boolean shouldOrder() {
         outputView.orderConfirmation();
-        return inputView.order();
+        return inputView.allowOrder();
     }
 
     private boolean isAddableToCart(ProductData productData) {
         outputView.addToCartConfirmation(productData);
-        return inputView.CartConfirm();
+        return inputView.allowAddCart();
     }
 
 }
