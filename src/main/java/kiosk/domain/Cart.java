@@ -12,7 +12,7 @@ public class Cart{
         return cart;
     }
 
-    private Map<Product, Integer> products = new HashMap<>();
+    private final Map<Product, Integer> products = new HashMap<>();
 
     public void add(Product product) {
         products.compute(product, (key, value) -> (value == null) ? 1 : value + 1);
