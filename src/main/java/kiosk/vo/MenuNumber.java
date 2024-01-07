@@ -1,21 +1,14 @@
 package kiosk.vo;
 
-public class MenuNumber {
+public record MenuNumber(int menuNumber) {
     private static final int INPUT_START_RANGE = 0;
-    private final int menuNumber;
 
-
-    public MenuNumber(int menuNumber) {
+    public MenuNumber {
         validateMenuRange(menuNumber);
-        this.menuNumber = menuNumber;
     }
 
-    public int getMenuNumber() {
-        return menuNumber;
-    }
-
-    private void validateMenuRange (int menuNumber){
-        if(!(INPUT_START_RANGE <= menuNumber && menuNumber <= MenuCategory.countCategory())){
+    private void validateMenuRange(int menuNumber) {
+        if (!(INPUT_START_RANGE <= menuNumber && menuNumber <= MenuCategory.countCategory())) {
             throw new IllegalArgumentException();
         }
     }
@@ -24,7 +17,7 @@ public class MenuNumber {
         return menuNumber == categoryOrdinal;
     }
 
-    public MenuCategory getMenuCategoryByMenuNumber(){
+    public MenuCategory getMenuCategoryByMenuNumber() {
         return MenuCategory.getMenuCategoryOrdinal(menuNumber);
     }
 }
