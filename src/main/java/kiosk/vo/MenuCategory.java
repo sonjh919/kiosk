@@ -1,7 +1,5 @@
 package kiosk.vo;
 
-import kiosk.domain.Menu;
-
 public enum MenuCategory {
     SUMMARY("총 주문 내역", "총 주문 금액과 상품 목록 출력"),
     COFFEE("커피", "커피냠냠"),

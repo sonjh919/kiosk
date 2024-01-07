@@ -21,7 +21,7 @@ public class KioskService {
     }
 
     public void addCart(ProductData productData) {
-        Product product = new Product(productData.getName(), productData.getPrice(), productData.getDescription());
+        Product product = productData.createProduct();
         cart.add(product);
     }
 

@@ -18,19 +18,6 @@ public class InputView {
         return getInputWithValidation(this::readUserInput, MenuNumber::new);
     }
 
-//    public MenuNumber menu() {
-//        while (true) {
-//            try {
-//                int input = readUserInput();
-//                return new MenuNumber(input);
-//            } catch (NumberFormatException e) {
-//                System.out.println(INPUT_ERROR_MESSAGE);
-//            } catch (IllegalArgumentException e) {
-//                System.out.println(RANGE_ERROR_MESSAGE);
-//            }
-//        }
-//    }
-
     public ProductData product(MenuNumber menuNumber) {
         return getInputWithValidation(this::readUserInput, input -> validateProductRange(menuNumber, input));
     }

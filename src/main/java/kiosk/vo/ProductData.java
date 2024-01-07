@@ -1,5 +1,7 @@
 package kiosk.vo;
 
+import kiosk.domain.Product;
+
 public enum ProductData {
     AMERICANO("아메리카노", 3500, "아메리카노 냠냠", MenuCategory.COFFEE),
     ESPRESSO("에스프레소", 3000, "에스프레소 냠냠", MenuCategory.COFFEE),
@@ -39,29 +41,20 @@ public enum ProductData {
     public MenuCategory getMenuCategory() { return menuCategory; }
 
     public static ProductData getProductByOrdinal(MenuNumber menuNumber, int productOrdinal) {
-        int count = 1;
+        int countProduct = 1;
         for (ProductData product : ProductData.values()) {
             if (menuNumber.isCorrectOrdinal(product.getMenuCategory().ordinal())) {
-                if (count == productOrdinal) {
+                if (countProduct == productOrdinal) {
                     return product;
                 }
-                count++;
+                countProduct++;
             }
         }
       throw new IllegalArgumentException();
     }
 
-//    public static ProductData getProductByOrdinal(int categoryOrdinal, int productOrdinal) {
-//        int count = 1;
-//        for (ProductData product : ProductData.values()) {
-//            if (product.getMenuCategory().ordinal()+1 == categoryOrdinal){
-//                if(count==productOrdinal) {
-//                    return product;
-//                }
-//                count++;
-//            }
-//        }
-//        throw new IllegalArgumentException();
-//    }
+    public Product createProduct() {
+        return new Product(name, price, description);
+    }
 
 }
