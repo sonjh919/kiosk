@@ -1,4 +1,4 @@
-package kiosk.vo;
+package kiosk.domain;
 
 public record WaitTime(int waitTime) {
 }

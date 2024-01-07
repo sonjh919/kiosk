@@ -1,5 +1,6 @@
 package kiosk.vo;
 
+import kiosk.domain.MenuNumber;
 import kiosk.domain.Product;
 
 public enum ProductData {

@@ -1,7 +1,7 @@
 package kiosk.controller;
 
-import kiosk.vo.MenuNumber;
-import kiosk.vo.WaitTime;
+import kiosk.domain.MenuNumber;
+import kiosk.domain.WaitTime;
 import kiosk.service.KioskService;
 import kiosk.view.InputView;
 import kiosk.view.OutputView;

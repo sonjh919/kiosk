@@ -1,4 +1,6 @@
-package kiosk.vo;
+package kiosk.domain;
+
+import kiosk.vo.MenuCategory;
 
 public record MenuNumber(int menuNumber) {
     private static final int INPUT_START_RANGE = 0;

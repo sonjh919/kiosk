@@ -3,7 +3,7 @@ package kiosk.service;
 import kiosk.domain.Cart;
 import kiosk.domain.Product;
 import kiosk.domain.SalesSummary;
-import kiosk.vo.WaitTime;
+import kiosk.domain.WaitTime;
 import kiosk.domain.WaitingNumber;
 import kiosk.vo.ProductData;
 

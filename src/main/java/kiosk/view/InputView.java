@@ -3,7 +3,7 @@ package kiosk.view;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
-import kiosk.vo.MenuNumber;
+import kiosk.domain.MenuNumber;
 import kiosk.vo.ProductData;
 
 public class InputView {
