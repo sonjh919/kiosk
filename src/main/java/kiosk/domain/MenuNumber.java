@@ -7,9 +7,12 @@ public class MenuNumber{
 
     private static final MenuNumber INSTANCE = new MenuNumber();
     private MenuNumber() {}
-    public static MenuNumber getInstance(int inputNumber){
-        INSTANCE.menuNumber = inputNumber;
+    public static MenuNumber getInstance(){
         return INSTANCE;
+    }
+
+    public void setMenuNumber(int inputNumber){
+        menuNumber = inputNumber;
     }
 
     public int getMenuNumber() {

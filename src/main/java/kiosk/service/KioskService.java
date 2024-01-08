@@ -1,6 +1,7 @@
 package kiosk.service;
 
 import kiosk.domain.Cart;
+import kiosk.domain.MenuNumber;
 import kiosk.domain.Product;
 import kiosk.domain.SalesSummary;
 import kiosk.domain.WaitTime;
@@ -11,6 +12,7 @@ public class KioskService {
     private final Cart cart;
     private final SalesSummary salesSummary;
     private final WaitingNumber waitingNumber;
+    private final MenuNumber menuNumber;
 
     private static final int WAIT_TIME= 3000;
 
@@ -18,6 +20,12 @@ public class KioskService {
         this.cart = Cart.getInstance();
         this.salesSummary = SalesSummary.getInstance();
         this.waitingNumber = WaitingNumber.getInstance();
+        this.menuNumber = MenuNumber.getInstance();
+    }
+
+    public MenuNumber setMenuNumber(int inputNumber) {
+        menuNumber.setMenuNumber(inputNumber);
+        return menuNumber;
     }
 
     public void addCart(ProductData productData) {
@@ -56,4 +64,6 @@ public class KioskService {
             e.printStackTrace();
         }
     }
+
+
 }
