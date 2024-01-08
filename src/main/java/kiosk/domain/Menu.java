@@ -4,7 +4,7 @@ public abstract class Menu {
     private final String name;
     private final String description;
 
-    public Menu(String name, String description) {
+    protected Menu(String name, String description) {
         this.name = name;
         this.description = description;
     }
