@@ -8,7 +8,7 @@
 
 # 📈 다이어그램
 
-![kiosk](https://github.com/sonjh919/kiosk/assets/109019081/269b8e4f-42f6-4a21-aad0-624a89e37807)
+![kiosk](https://github.com/sonjh919/kiosk/assets/109019081/794733f9-1be7-4795-9eb2-728cf1ae75c3)
 
 # 📚 기능 목록
 
