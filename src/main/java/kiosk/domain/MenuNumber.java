@@ -2,25 +2,26 @@ package kiosk.domain;
 
 import kiosk.vo.MenuCategory;
 
-public record MenuNumber(int menuNumber) {
-    private static final int INPUT_START_RANGE = 0;
+public class MenuNumber{
+    private int menuNumber;
 
-    public MenuNumber {
-        validateMenuRange(menuNumber);
+    private static final MenuNumber INSTANCE = new MenuNumber();
+    private MenuNumber() {}
+    public static MenuNumber getInstance(int inputNumber){
+        INSTANCE.menuNumber = inputNumber;
+        return INSTANCE;
     }
 
-    private void validateMenuRange(int menuNumber) {
-        if (!(INPUT_START_RANGE <= menuNumber && menuNumber <= MenuCategory.countCategory())) {
-            throw new IllegalArgumentException();
-        }
+    public int getMenuNumber() {
+        return menuNumber;
     }
 
     public boolean isCorrectOrdinal(int categoryOrdinal) {
-        return menuNumber == categoryOrdinal;
+        return INSTANCE.menuNumber == categoryOrdinal;
     }
 
     public MenuCategory getMenuCategoryByMenuNumber() {
-        return MenuCategory.getMenuCategoryOrdinal(menuNumber);
+        return MenuCategory.getMenuCategoryOrdinal(INSTANCE.menuNumber);
     }
 }
 

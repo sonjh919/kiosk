@@ -4,18 +4,20 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
 import kiosk.domain.MenuNumber;
+import kiosk.vo.MenuCategory;
 import kiosk.vo.ProductData;
 
 public class InputView {
     private static final String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 형식입니다. 숫자만 입력해 주세요.";
     private static final String RANGE_ERROR_MESSAGE = "[ERROR] 범위에 맞는 숫자를 입력해 주세요.";
+    private static final int INPUT_START_RANGE = 0;
     private static final int CONFIRMATION = 1;
     private static final int BACK= 1;
     private static final int CANCEL = 2;
 
 
-    public MenuNumber menu() {
-        return getInputWithValidation(this::readUserInput, MenuNumber::new);
+    public int menu() {
+        return getInputWithValidation(this::readUserInput, this::validateMenuRange);
     }
 
     public ProductData product(MenuNumber menuNumber) {
@@ -61,6 +63,13 @@ public class InputView {
     private boolean validateConfirmation(int confirmation) {
         if(confirmation == CONFIRMATION){ return true; }
         else if(confirmation == CANCEL){ return false; }
+        throw new IllegalArgumentException();
+    }
+
+    private int validateMenuRange(int menuNumber) {
+        if (INPUT_START_RANGE <= menuNumber && menuNumber <= MenuCategory.countCategory()) {
+            return menuNumber;
+        }
         throw new IllegalArgumentException();
     }
 

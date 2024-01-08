@@ -56,7 +56,7 @@ public class OutputView {
         System.out.println(SEPARATE_LINE + MENU_MESSAGE);
         int productNumber = INDEX;
         for(ProductData product : ProductData.values()){
-            if(product.getMenuCategory().ordinal() == menuNumber.menuNumber()){
+            if(product.getMenuCategory().ordinal() == menuNumber.getMenuNumber()){
                 System.out.printf(PRODUCT_FORMAT + NEWLINE, productNumber, product.getName(), product.getPrice(), product.getDescription());
                 productNumber++;
             }

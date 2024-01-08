@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class Cart{
+
+    private final Map<Product, Integer> products = new HashMap<>();
     private static final Cart cart = new Cart();
     private Cart(){}
     public static Cart getInstance(){
         return cart;
     }
-
-    private final Map<Product, Integer> products = new HashMap<>();
 
     public void add(Product product) {
         products.compute(product, (key, value) -> (value == null) ? 1 : value + 1);

@@ -26,7 +26,7 @@ public class KioskController {
 
     private void selectMenu() {
         outputView.menu();
-        MenuNumber menuNumber = inputView.menu();
+        MenuNumber menuNumber = MenuNumber.getInstance(inputView.menu());
 
         switch (menuNumber.getMenuCategoryByMenuNumber()) {
             case COFFEE, DESSERT, DRINK-> selectProduct(menuNumber);
